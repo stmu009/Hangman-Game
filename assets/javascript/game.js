@@ -4,7 +4,7 @@ var wins = 0;
 var blanks = [];
 var chosenWord = [];
 var guessedLetters = [];
-var restart = false;
+var restart = true;
 
 var checkGuess = function(keyInput) {
   if (chosenWord.indexOf(keyInput) >= 0) {
@@ -27,9 +27,15 @@ var win = function() {
   var winsElement = document.getElementById("wins");
   winsElement.textContent = wins;
   var currentWordElement = document.getElementById("current-word");
+  var goldImage = document.createElement("img");
+  goldImage.setAttribute('src', 'assets/images/gold-medal.gif');
+  goldImage.setAttribute('style', 'display:block; margin: 0 auto; width:50px;');
+  currentWordElement.appendChild(goldImage);
   var newPTag = document.createElement("p");
   newPTag.textContent = " You win! Press SPACE BAR to generate a new word";
   currentWordElement.appendChild(newPTag);
+  var audio = new Audio('assets/sounds/Ovation-Mike_Koenig-1061486511.wav');
+audio.play();
   restart = true;
 };
 
@@ -90,7 +96,39 @@ var validateKey = function(keyInput) {
 };
 
 var newWord = function() {
-  var possibleWords = ["red", "green", "blue"];
+  var possibleWords = [
+    "archery",
+    "badminton",
+    "baseball",
+    "basketball",
+    "boxing",
+    "canoe",
+    "kayak",
+    "climbing",
+    "cycling",
+    "diving",
+    "equestrian",
+    "fencing",
+    "golf",
+    "gymnastics",
+    "handball",
+    "judo",
+    "karate",
+    "pentathalon",
+    "rowing",
+    "rugby",
+    "sailing",
+    "shooting",
+    "soccer",
+    "swimming",
+    "surfing",
+    "taekwondo",
+    "tennis",
+    "triathlon",
+    "volleyball",
+    "weightlifting",
+    "wrestling"
+  ];
   chosenWord = possibleWords[Math.floor(Math.random() * possibleWords.length)];
 
   return chosenWord;
